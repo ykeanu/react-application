@@ -5,18 +5,36 @@ var createReactClass = require('create-react-class');
 
 //Create component
 var TodoComponent = createReactClass({
+	//Set the initial state
+	getInitialState: function(){
+		// State of the entire component
+		return{
+			todos: ['wash up', 'eat some cheese', 'take a nap'],
+			age: 30
+		}
+	},
+// Pass information with props
 	render: function(){
+		var ager = setTimeout(function(){
+			this.setState({
+				age: 35
+			});
+
+		}, 5000);
 		return(
-			<div>
-				<p><strong>Restuarant: </strong> {this.props.food.name}</p>
-				<p><strong>Quality: </strong> {this.props.food.quality}</p>
-				<p><strong>Price: </strong> {this.props.food.price}</p>
+			<div id="todo-list">
+			<p>The busiest people have the most leisure...</p>
+			<p>{this.state.age}</p>
+			<ul>
+				<li>{this.state.todos[0]}</li>
+				<li>{this.state.todos[2]}</li>
+				<li>{this.state.todos[3]}</li>
+			</ul>
+			<ListComponent todos={this.state.todos} />
 			</div>
 			);
 	}
 });
 
-var myFood = {name:"Bud Namu", quality:"Low Tier", price:"13.50"}
-
 // Put component into html page
-ReactDOM.render(<TodoComponent mssg="I like kbbq" food={myFood} />, document.getElementById('todo-wrapper'));
+ReactDOM.render(<TodoComponent />, document.getElementById('todo-wrapper'));
